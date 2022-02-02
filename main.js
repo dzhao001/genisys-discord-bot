@@ -1,8 +1,7 @@
-// import statements
 const envior = require("dotenv")
 const { Client, Intents, DiscordAPIError } = require('discord.js');
 const Discord = require("discord.js")
-const client = new Discord.Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, ] });
+const client = new Discord.Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES ] });
 const fs = require("fs");
 
 // prefix used by the bot
@@ -26,7 +25,7 @@ client.once("ready", () => {
     console.log("Discord Bot is Online!");
 });
 
-// runs continously and detects messages sent by the user
+// detects messages sent by the user, runs command if message matches command name
 client.on("messageCreate", (message) =>{
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -43,5 +42,5 @@ client.on("messageCreate", (message) =>{
     }
 });
 
-// logs onto the discord bot provided by the token in .env file
+// launches the discord bot provided by token in .env file
 client.login(process.env.TOKEN)
